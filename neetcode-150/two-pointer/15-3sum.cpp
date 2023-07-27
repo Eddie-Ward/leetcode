@@ -1,18 +1,22 @@
+#include <bits/stdc++.h>
+
 #include <algorithm>
+#include <functional>
 #include <iostream>
-#include <set>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 using namespace std;
+using Triplet = std::tuple<int, int, int>;
 
 class Solution {
    public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         int n = nums.size();
 
-        set<tuple<int, int, int>> triplets;
+        unordered_set<Triplet, hashFunction> triplets;
         sort(nums.begin(), nums.end());
 
         for (int i = 0; i < n - 2; ++i) {
@@ -41,5 +45,17 @@ class Solution {
         for (auto& triplet : triplets) {
             answers.push_back({get<0>(triplet), get<1>(triplet), get<2>(triplet)});
         }
+
+        return answers;
     }
+
+   private:
+    struct hashFunction {
+        // Overload header must have const input and const function
+        std::size_t operator()(const Triplet& triplet) const {
+            string hashString = to_string(get<0>(triplet)) + "##" + to_string(get<1>(triplet)) + "##" + to_string(get<2>(triplet));
+            std::hash<std::string> stringHasher;
+            return stringHasher(hashString);
+        }
+    };
 };
