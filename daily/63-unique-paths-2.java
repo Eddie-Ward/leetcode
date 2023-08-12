@@ -14,7 +14,8 @@ class Solution {
 
         for (int row = 1; row <= numRows; ++row) {
             for (int col = 1; col <= numCols; ++col) {
-                if (obstacleGrid[row][col] == 1) {
+                // Note that dp is 1 dim bigger and shifted
+                if (obstacleGrid[row - 1][col - 1] == 1) {
                     dp[row][col] = 0;
                 } else {
                     dp[row][col] = dp[row - 1][col] + dp[row][col - 1];
