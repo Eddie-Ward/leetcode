@@ -23,6 +23,7 @@ class Solution {
 
         for (int degree : deg) {
             if (first < degree) {
+                second = first;
                 first = degree;
             } else if (second < degree && degree < first) {
                 second = degree;
@@ -44,7 +45,7 @@ class Solution {
             int edgeCount = 0;
 
             for (int[] road : roads) {
-                if (deg[road[0]] == firstCount && deg[road[1]] == firstCount) {
+                if (deg[road[0]] == first && deg[road[1]] == first) {
                     edgeCount++; // Count the number of edges between all max-degree nodes
                 }
             }
@@ -60,10 +61,10 @@ class Solution {
             int edgeCount = 0;
 
             for (int[] road : roads) {
-                if (deg[road[0]] == firstCount && deg[road[1]] == secondCount) {
+                if (deg[road[0]] == first && deg[road[1]] == second) {
                     edgeCount++;
                 }
-                if (deg[road[1]] == firstCount && deg[road[0]] == secondCount) {
+                if (deg[road[1]] == first && deg[road[0]] == second) {
                     edgeCount++;
                 }
             }
